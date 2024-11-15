@@ -9,6 +9,12 @@
   <%= link_to "Delete this bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 <% end %>
 </div>
+<% if @list.photo.attached?  %>
+ <%= cl_image_tag @list.photo.key, height: 300, width: 300, crop: :fill %>
+ <% else %>
+ <%#= image_tag "logo.png" %>
+  <h1>No picture!</h1>
+ <% end %>
 
 <div>
   <%= link_to "Edit this list", edit_list_path(@list) %> |
@@ -16,3 +22,4 @@
   <%= link_to "Create a new bookmark",  new_list_bookmark_path(@list) %>
   <%= button_to "Destroy this list", @list, method: :delete %>
 </div>
+
