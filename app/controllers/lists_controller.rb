@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :destroy]
+  before_action :set_list, only: [:show, :update, :destroy]
 
   def index
     @lists = List.all
@@ -31,6 +31,16 @@ class ListsController < ApplicationController
     end
   end
 
+   # PATCH/PUT /restaurants/1
+   def update
+    if @list.update(list_params)
+      redirect_to @list, notice: "List was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  #DELETE /lists/1
   def destroy
     @list.destroy
     redirect_to lists_path, status: :see_other
